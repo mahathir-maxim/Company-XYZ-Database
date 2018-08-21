@@ -1,0 +1,222 @@
+
+CREATE VIEW v1 AS
+SELECT EmpID, AVG(amount)
+FROM EmpInfo
+GROUP BY EmpID; -- View 1
+
+CREATE View isSelec AS
+SELECT PempID, COUNT(Grade) AS Gnum
+FROM Interview
+INNER JOIN JobPosition ON Interview.JOBID = JobPosition.JobID
+INNER JOIN Interv ON Interview.JobID = Interv.JobID
+AND Interview.DepID = Interv.DepID
+AND Interview.Interviewer = Interv.Interviewer
+AND Interview.InterviewTime = Interv.InterviewTime
+GROUP BY PempID
+HAVING Grade > 60;-- view 2
+
+CREATE VIEW v3 AS
+SELECT ProdID, COUNT(ProdID)
+FROM Sales
+GROUP BY ProdID; -- view 3
+
+CREATE VIEW cheapPart AS
+SELECT PartID , MIN(PartPrice) AS cpp
+FROM SellParts
+GROUP BY PartID;
+CREATE VIEW v4 AS
+SELECT ProdID, SUM(cpp) AS ProdCost
+FROM HavePart H
+INNER JOIN cheapPart C ON H.PartID = C.PartID
+ GROUP BY ProdID; -- View 4
+
+SELECT Interviewer
+FROM Interv
+WHERE PempID = 23 AND JobID = 1111; -- 1
+
+SELECT JobID
+FROM JobPosition
+WHERE DepID = 1 AND ( PostDate >='2011-01-01 1:01:01' AND PostDate < '2011-02-01 1:01:01') ; -- 2
+
+SELECT PersonID, Lname, Fname
+FROM Person
+INNER JOIN Employee ON Person.PersonID = Employee.EmpID
+WHERE EmpID IN (
+SELECT EmpID 
+FROM Employee
+WHERE EmpID NOT IN (
+SELECT SupervisorID 
+FROM Employee)); -- 3
+
+SELECT SID1, Slocation
+FROM Site
+INNER JOIN Sales ON Site.SID1 = Sales.SID
+WHERE SID IN (
+SELECT SID
+FROM Sales
+WHERE (salesTime >= '2011-03-01 01:01:01' AND salesTime < '2011-04-01 01:01:01' )); -- 4
+
+--5 
+
+CREATE View isSelected3 AS
+    SELECT PempID, COUNT(Grade) AS Gnum, Interview.JobID AS J, Interview.InterviewTime
+    FROM Interview
+    INNER JOIN JobPosition ON Interview.JOBID = JobPosition.JobID
+    INNER JOIN Interv ON Interview.JobID = Interv.JobID
+    AND Interview.DepID = Interv.DepID
+    AND Interview.Interviewer = Interv.Interviewer
+    AND Interview.InterviewTime = Interv.InterviewTime
+    GROUP BY PempID
+    HAVING Grade > 60 AND ( AVG(Grade) >= 70) ; 
+   
+ CREATE VIEW Hired3 AS 
+SELECT pempID, isSelected3.J, isSelected3.InterviewTime AS isHired
+FROM isSelected3
+ WHERE Gnum >= 5;
+   SELECT J, isHired
+   FROM Hired3
+   INNER JOIN JobPosition ON Hired3.J = JobPosition.JobID
+   WHERE julianday(isHired) - julianday(PostDate)> 31;
+-- 5
+--6.  If it is assumed that Product price is determined by 
+-- the part purchase cost of them.
+
+SELECT EmpID
+    FROM Sales INNER JOIN v5 ON Sales.ProdID1 = v5.ProdID -- v5 is the 4th view made
+    WHERE ProdCost > 200;
+	-- if Product Price is in the databade
+SELECT PersonID, Fname, Lname
+FROM Person
+INNER JOIN Employee ON Person.PersonID = Employee.EmpID 
+INNER JOIN Sales ON Employee.EmpID = Sales.EmpID
+INNER JOIN Product ON Sales.ProdID1 = Product.ProdID
+WHERE Price > 200;
+--6
+
+SELECT DepID, Dname
+FROM Department
+WHERE NOT (SELECT JobID
+FROM JobPosition
+WHERE (PostDate >= '2011-01-01 'AND PostDate <= '2011-02-21')); -- 7
+*******************
+SELECT DISTINCT PersonID Fname, Lname, DepID
+FROM Person
+INNER JOIN Apply ON Person.PersonID = Apply.EmpID
+WHERE EmpID IN (
+SELECT DISTINCT EmpID 
+FROM Apply 
+WHERE JobID = 12345); -- 8. However values may repeat
+
+*********************
+--9
+CREATE VIEW bestSeller AS
+SELECT ProdID1, COUNT(ProdID1) AS seller
+FROM Sales
+GROUP BY ProdID1
+ORDER BY COUNT(ProdID1) DESC
+LIMIT 1; -- Returns ID only
+
+SELECT Style
+FROM Product
+INNER JOIN bestSeller ON Product.ProdID = bestSeller.ProdID1
+WHERE Product.ProdID = bestSeller.ProdID1; -- Now returns style
+--9
+
+***************************
+----10
+CREATE VIEW Seller AS
+SELECT ProdID1, COUNT(ProdID1) AS sellers
+FROM Sales
+GROUP BY ProdID1
+ORDER BY COUNT(ProdID1) DESC; -- 10 but returns ProdId not style
+
+CREATE VIEW ProductProf2 AS
+SELECT ProdID AS PID, Price AS ProdPrice
+    FROM Product INNER JOIN v7 ON Product.ProdID = v7.PD -- v5 is the 4th view made
+    ORDER BY (Price - ProdCost) Desc;
+	
+	SELECT Type1
+	FROM Product
+	INNER JOIN Seller ON Product.ProdID = Seller.ProdID1
+	INNER JOIN ProductProf2 ON Seller.ProdID1 = ProductProf2.PID
+	ORDER BY (sellers * ProdPrice) Desc
+	LIMIT 1;
+-- 10	
+	
+
+*****************
+SELECT PersonID, Lname, Fname
+FROM Person
+INNER JOIN Work ON Person.PersonID = Work.EmpID
+WHERE EmpID IN
+(SELECT DISTINCT DepID
+FROM Work); -- 11. It still list one employee that does not work on all the --departments
+************************
+
+
+---12
+CREATE View isSelect4 AS
+    SELECT PempID, COUNT(Grade) AS Gnum
+    FROM Interview
+    INNER JOIN JobPosition ON Interview.JOBID = JobPosition.JobID
+    INNER JOIN Interv ON Interview.JobID = Interv.JobID
+    AND Interview.DepID = Interv.DepID
+    AND Interview.Interviewer = Interv.Interviewer
+    AND Interview.InterviewTime = Interv.InterviewTime
+    GROUP BY PempID
+    HAVING Grade > 60 AND ( AVG(Grade) >= 70) ; 
+   
+CREATE VIEW Passed AS
+SELECT pempID
+    FROM isSelect4
+    WHERE Gnum >= 5;
+	
+   
+   SELECT Fname, Lname, Address1 -- I assume Address1 is the email
+   FROM Person 
+   INNER JOIN Passed ON Person.PersonID = Passed.pempID
+   WHERE PersonID = pempID;
+   
+   -- 12
+   
+CREATE View isSelect4 AS -- 13
+    SELECT PempID, COUNT(Grade) AS Gnum
+    FROM Interview
+    INNER JOIN JobPosition ON Interview.JOBID = JobPosition.JobID
+    INNER JOIN Interv ON Interview.JobID = Interv.JobID
+    AND Interview.DepID = Interv.DepID
+    AND Interview.Interviewer = Interv.Interviewer
+    AND Interview.InterviewTime = Interv.InterviewTime
+    GROUP BY PempID
+    HAVING Grade > 60 AND ( AVG(Grade) >= 70) ; 
+   
+CREATE VIEW Passed AS
+SELECT pempID
+    FROM isSelect4
+    WHERE Gnum >= 5;
+	
+   
+   SELECT Fname, Lname, Address1 -- I assume Address1 is the email
+   FROM Person 
+   INNER JOIN Passed ON Person.PersonID = Passed.pempID
+   WHERE PersonID = pempID;
+
+-- 13
+
+SELECT EmpID, AVG(amount) -- 14
+FROM EmpInfo
+GROUP BY EmpID
+ORDER BY AVG(amount) DESC
+LIMIT 1;
+
+
+-- but if Vendor VID equal VID1. It retuns the name as well
+
+SELECT VID1, Vname -- 15 In EER diagram did not have an attribute for part and product.
+FROM Vendor AS V
+INNER JOIN SellParts ON V.VID1 = SellParts.VID
+WHERE PartID = 9509
+ORDER BY PartPrice ASC
+LIMIT 1;
+
+--https://www.tutorialspoint.com/execute_sql_online.php
