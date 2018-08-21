@@ -32,7 +32,7 @@ FOREIGN KEY (EmpID) REFERENCES Employee(EmpID),
 FOREIGN KEY (DepID) REFERENCES Department(DepID));
 
 CREATE TABLE Department(DepID int NOT NULL PRIMARY KEY, Dname VARCHAR(45));
-
+                                                                      
 CREATE TABLE JobPosition(JobID int NOT NULL, DepID int NOT NULL, PostDate
 date,  PRIMARY KEY(JobID, DepID), 
 FOREIGN KEY (DepID) REFERENCES Department(DepID));
