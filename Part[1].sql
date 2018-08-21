@@ -1,0 +1,21 @@
+insert into Part (PartID, PartName, weight) values (9509, 'cup', 5);
+insert into Part (PartID, PartName, weight) values (2290, 'hub', 4);
+insert into Part (PartID, PartName, weight) values (4943, 'bot', 6);
+insert into Part (PartID, PartName, weight) values (4732, 'bo1t', 3);
+insert into Part (PartID, PartName, weight) values (8253, 'wot', 2);
+insert into Part (PartID, PartName, weight) values (9792, 'boit', 1);
+insert into Part (PartID, PartName, weight) values (6835, 'bot2', 10);
+insert into Part (PartID, PartName, weight) values (4554, 'boht', 1);
+insert into Part (PartID, PartName, weight) values (5205, 'boht', 1);
+insert into Part (PartID, PartName, weight) values (9081, 'bopot', 1);
+insert into Part (PartID, PartName, weight) values (8052, 'kot', 6);
+insert into Part (PartID, PartName, weight) values (3859, 'kot2', 4);
+insert into Part (PartID, PartName, weight) values (8803, 'kot3', 1);
+insert into Part (PartID, PartName, weight) values (6877, 'kot4', 1);
+insert into Part (PartID, PartName, weight) values (3517, 'kot5', 1);
+insert into Part (PartID, PartName, weight) values (4549 , 'kot6', 1);
+insert into Part (PartID, PartName, weight) values (3185, 'kot7', 1);
+insert into Part (PartID, PartName, weight) values (1125 , 'kot8', 1);
+insert into Part (PartID, PartName, weight) values (5121 , 'kot9', 1);
+insert into Part (PartID, PartName, weight) values (6326, 'kot99', 1);
+

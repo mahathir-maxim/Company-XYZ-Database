@@ -1,0 +1,10 @@
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (75, 201, 67, 11,1, '2017-01-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (77, 201, 72, 16,2, '2017-02-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (83,201, 100, 12,3, '2011-03-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (109,201, 93, 13,4, '2017-04-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (110,201, 85, 14,5, '2017-05-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (111,200, 100, 15,6, '2017-06-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (112,200, 100, 17,7, '2017-07-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (113,200, 100, 18,8, '2017-08-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (114,200, 100, 19,9, '2017-09-18 18:48:53');
+insert into Sales(salesID, SID, ProdID1, CustID, EmpID, salesTime) values (115,200, 100, 20,10, '2017-10-18 18:48:53');

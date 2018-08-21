@@ -1,0 +1,11 @@
+insert into Work (EmpID, DepID, startTime, EndTime) values (1, 2, '2017-07-15 11:07:29', '2017-04-29 04:48:27');
+insert into Work (EmpID, DepID, startTime, EndTime) values (2, 1, '2017-03-11 12:00:42', '2016-12-12 00:37:50');
+insert into Work (EmpID, DepID, startTime, EndTime) values (3, 1, '2017-04-13 18:58:51', '2017-05-14 10:31:45');
+insert into Work (EmpID, DepID, startTime, EndTime) values (4, 1, '2017-02-26 10:17:33', '2017-03-22 06:34:21');
+insert into Work (EmpID, DepID, startTime, EndTime) values (5, 1, '2017-01-06 22:27:50', '2017-05-24 14:19:05');
+insert into Work (EmpID, DepID, startTime, EndTime) values (6, 1, '2017-08-07 16:49:41', '2017-09-19 17:13:47');
+insert into Work (EmpID, DepID, startTime, EndTime) values (7, 2, '2017-01-22 23:25:44', '2016-12-13 03:30:40');
+insert into Work (EmpID, DepID, startTime, EndTime) values (8, 1, '2016-12-28 03:10:13', '2017-08-13 16:15:53');
+insert into Work (EmpID, DepID, startTime, EndTime) values (9, 2, '2017-03-15 14:43:08', '2017-05-10 00:21:58');
+insert into Work (EmpID, DepID, startTime, EndTime) values (10, 2, '2017-02-03 07:52:28', '2017-04-05 07:43:40');
+insert into Work (EmpID, DepID, startTime, EndTime) values (1, 1, '2017-02-03 07:52:28', '2017-04-05 07:43:40');
