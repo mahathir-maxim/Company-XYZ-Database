@@ -1,0 +1,10 @@
+insert into Customer (CustID,  SalesManID) values (11,  4);
+insert into Customer (CustID,  SalesManID) values (12,  4);
+insert into Customer (CustID, SalesManID) values (13,  4);
+insert into Customer (CustID, SalesManID) values (14, 4);
+insert into Customer (CustID, SalesManID) values (15, 3);
+insert into Customer (CustID, SalesManID) values (16, 3);
+insert into Customer (CustID, SalesManID) values (17,  3);
+insert into Customer (CustID, SalesManID) values (18, 1);
+insert into Customer (CustID, SalesManID) values (19, 1);
+insert into Customer (CustID, SalesManID) values (20,2);
